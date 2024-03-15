@@ -11,7 +11,7 @@
 #root {
   display: flex;
   background: #fff;
-
+  align-items: center;
   min-height: 100vh;
   font-family: Space Grotesk;
   flex-direction: column;
@@ -34,7 +34,7 @@ input[data-check="true"] {
 #bg-desktop {
   display: none;
 }
-@media (min-width: 1280px) {
+@media (min-width: 1440px) {
   #bg-mobile {
     display: none;
   }
@@ -42,5 +42,8 @@ input[data-check="true"] {
     display: flex;
     min-height: 100vh;
     min-width: 483px;
+  }
+  #root{
+    align-items: start;
   }
 }

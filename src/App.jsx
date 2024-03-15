@@ -39,7 +39,7 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col items-center xxl:flex-row">
+    <div className="flex flex-col items-center xxl:flex-row w-[375px]">
       <CreditCards {...details} />
       <div className="xxl:ml-[400px] xxl:mb-[50px]">
         {form && (

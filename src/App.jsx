@@ -39,13 +39,13 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col items-center xl:flex-row xl:justify-start">
+    <div className="flex flex-col items-center xxl:flex-row">
       <CreditCards {...details} />
-      <div className="xl:ml-[400px] xl:mb-[50px]">
+      <div className="xxl:ml-[400px] xxl:mb-[50px]">
         {form && (
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="mt-[90px] flex flex-col items-start gap-[5px] mb-[50px] xl:mt-0"
+            className="mt-[90px] flex flex-col items-start gap-[5px] mb-[50px] xxl:mt-0"
           >
             <label className="w-[140px]" htmlFor="">
               CARDHOLDER NAME
@@ -64,7 +64,7 @@ function App() {
                 },
               })}
               placeholder="e.g. Jane Appleseed"
-              className="w-[327px] h-[45px] rounded-[10px] border-[1px solid #dfdee0] bg-white xl:w-[381px]"
+              className="w-[327px] h-[45px] rounded-[10px] border-[1px solid #dfdee0] bg-white xxl:w-[381px]"
             />
             <p className="h-[15px] text-[12px] text-[#ff5050] font-medium ">
               {errors.UserName?.message}
@@ -87,7 +87,7 @@ function App() {
                 minLength: 16,
               })}
               placeholder="e.g 1234 5678 9123 0000 "
-              className="w-[327px] h-[45px] rounded-[10px] border-[1px solid #dfdee0] bg-white xl:w-[381px]"
+              className="w-[327px] h-[45px] rounded-[10px] border-[1px solid #dfdee0] bg-white xxl:w-[381px]"
             />
             <p className="h-[15px] text-[12px] text-[#ff5050] font-medium ">
               {errors.CardNumber?.message}
@@ -100,7 +100,7 @@ function App() {
               <label htmlFor="">CVC</label>
             </section>
 
-            <section className="flex gap-[5px] xl:gap-[10px]">
+            <section className="flex gap-[5px] xxl:gap-[10px]">
               <div className="flex flex-col items-center">
                 <input
                   onInput={(e) => {
@@ -119,7 +119,7 @@ function App() {
                   })}
                   placeholder="MM"
                 />
-                <p className="h-[15px] text-[12px] text-[#ff5050] font-medium inline-flex xl:w-[80px] whitespace-nowrap">
+                <p className="h-[15px] text-[12px] text-[#ff5050] font-medium inline-flex xxl:w-[80px] whitespace-nowrap">
                   {errors.Month?.message}
                 </p>
               </div>
@@ -129,7 +129,7 @@ function App() {
                     setYear(e.target.value);
                   }}
                   data-check={error}
-                  className="w-[72px] h-[45px] rounded-[8px] xl:w-[80px]"
+                  className="w-[72px] h-[45px] rounded-[8px] xxl:w-[80px]"
                   {...register("Years", {
                     required: true,
                     pattern: {
@@ -151,7 +151,7 @@ function App() {
                     setCcv(e.target.value);
                   }}
                   data-check={error}
-                  className="w-[164px] h-[45px] xl:w-[191px]"
+                  className="w-[164px] h-[45px] xxl:w-[191px]"
                   {...register("Cvc", {
                     required: "Can't be blank",
                     pattern: {
@@ -179,13 +179,13 @@ function App() {
                 }
               }}
               type="submit"
-              className="w-[327px] h-[53px] cursor-pointer rounded-[8px] mt-[10px] bg-[#21092f] text-white xl:w-[381px]"
+              className="w-[327px] h-[53px] cursor-pointer rounded-[8px] mt-[10px] bg-[#21092f] text-white xxl:w-[381px]"
             />
           </form>
         )}
       </div>
       {registered && (
-        <div className="flex flex-col items-center gap-[16px] mt-[80px] xl:mt-[-100px] xl:ml-[30px]">
+        <div className="flex flex-col items-center gap-[16px] mt-[80px] xxl:mt-[-100px] xxl:ml-[30px]">
           <img
             className="w-[80px] h-[80px]"
             src="../assets/icon-complete.svg"
@@ -193,7 +193,7 @@ function App() {
           />
           <h2 className="text-[#21092f] text-[28px] font-medium">THANK YOU!</h2>
           <p className="text-[#8f8694]">We’ve added your card details</p>
-          <button className="mt-[20px] w-[327px] h-[53px] bg-[#21092f] text-white rounded-[10px]">
+          <button className="mt-[20px] w-[327px] h-[53px] bg-[#21092f] text-white rounded-[10px] xxl:w-[381px]">
             Continue
           </button>
         </div>

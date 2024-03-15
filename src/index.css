@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#root {
+  display: flex;
+  background: #fff;
+
+  min-height: 100vh;
+  font-family: Space Grotesk;
+  flex-direction: column;
+}
+
+input {
+  border: 1px solid #dfdee0;
+  border-radius: 8px;
+  padding: 11px 16px;
+}
+label {
+  color: #21092f;
+  height: 15px;
+  font-size: 12px;
+  font-weight: 500;
+}
+input[data-check="true"] {
+  border: 1px solid #ff5050;
+}
+#bg-desktop {
+  display: none;
+}
+@media (min-width: 1280px) {
+  #bg-mobile {
+    display: none;
+  }
+  #bg-desktop {
+    display: flex;
+    min-height: 100vh;
+    min-width: 483px;
+  }
+}

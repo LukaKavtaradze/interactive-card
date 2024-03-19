@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
-import InputMask from "react-input-mask";
+import InputMask, { ReactInputMask } from "react-input-mask";
+import ReactInputDateMask from "react-input-date-mask";
 import CreditCards from "./components/creditCards";
 import { useState, useSyncExternalStore } from "react";
 
@@ -23,6 +24,12 @@ function App() {
   const [ccv, setCcv] = useState("");
   const [registered, setRegistered] = useState(false);
   const [form, setForm] = useState(true);
+
+  console.log(userSurname.length);
+  console.log(cardNum.length);
+  console.log(month.length);
+  console.log(year.length);
+  console.log(ccv.length);
 
   let userName = watch("UserName");
   let cardNumber = watch("CardNumber");
@@ -62,6 +69,10 @@ function App() {
                   value: /^[A-Za-z]+(?: [A-Za-z]+)+$/,
                   message: "Invalid Name format",
                 },
+                minLength: {
+                  value: 10,
+                  message: "Username should be at least 10 characters",
+                },
               })}
               placeholder="e.g. Jane Appleseed"
               className="w-[327px] h-[45px] rounded-[10px] border-[1px solid #dfdee0] bg-white xxl:w-[381px]"
@@ -75,16 +86,19 @@ function App() {
             </label>
             <InputMask
               onInput={(e) => {
-                setCardNum(e.target.value);
+                setCardNum(e.target.value.replace(/_/g, ""));
               }}
               data-check={error}
               mask="9999 9999 9999 9999"
               {...register("CardNumber", {
                 required: "Can't be blank",
-                pattern: {
-                  value: /^[0-9]+$/,
+                validate: {
+                  minLength: (value) => {
+                    if (value && value.replace(/_/g, "").length < 19) {
+                      return "Fill in this field";
+                    }
+                  },
                 },
-                minLength: 16,
               })}
               placeholder="e.g 1234 5678 9123 0000 "
               className="w-[327px] h-[45px] rounded-[10px] border-[1px solid #dfdee0] bg-white xxl:w-[381px]"
@@ -93,7 +107,7 @@ function App() {
               {errors.CardNumber?.message}
             </p>
 
-            <section className="flex gap-[5px]">
+            <section className="flex gap-[45px]">
               <label htmlFor="" className="w-[140px] ">
                 Exp. Date (MM/YY)
               </label>
@@ -102,20 +116,22 @@ function App() {
 
             <section className="flex gap-[5px] xxl:gap-[10px]">
               <div className="flex flex-col items-center">
-                <input
+                <InputMask
+                  mask="99"
                   onInput={(e) => {
-                    setMonth(e.target.value);
+                    setMonth(e.target.value.replace(/_/g, ""));
                   }}
                   data-check={error}
                   className="w-[72px] h-[45px] rounded-[8px]"
                   {...register("Month", {
                     required: "Can't be blank",
-                    pattern: {
-                      value: /^[0-9]+$/,
-                      message: "Only Numbers",
+                    validate: {
+                      minLength: (value) => {
+                        if (value && value.replace(/_/g, "").length < 2) {
+                          return "Fill in this field";
+                        }
+                      },
                     },
-                    minLength: 2,
-                    maxLength: 2,
                   })}
                   placeholder="MM"
                 />
@@ -124,20 +140,22 @@ function App() {
                 </p>
               </div>
               <div className="flex flex-col items-center">
-                <input
+                <InputMask
+                  mask="99"
                   onInput={(e) => {
-                    setYear(e.target.value);
+                    setYear(e.target.value.replace(/_/g, ""));
                   }}
                   data-check={error}
                   className="w-[72px] h-[45px] rounded-[8px] xxl:w-[80px]"
                   {...register("Years", {
                     required: true,
-                    pattern: {
-                      value: /^[0-9]+$/,
-                      message: "Only Numbers",
+                    validate: {
+                      minLength: (value) => {
+                        if (value && value.replace(/_/g, "").length < 2) {
+                          return "Fill in this field";
+                        }
+                      },
                     },
-                    minLength: 1,
-                    maxLength: 2,
                   })}
                   placeholder="YY"
                 />
@@ -146,20 +164,22 @@ function App() {
                 </p>
               </div>
               <div className="flex flex-col items-center">
-                <input
+                <InputMask
+                  mask="999"
                   onInput={(e) => {
-                    setCcv(e.target.value);
+                    setCcv(e.target.value.replace(/_/g, ""));
                   }}
                   data-check={error}
                   className="w-[164px] h-[45px] xxl:w-[191px]"
                   {...register("Cvc", {
                     required: "Can't be blank",
-                    pattern: {
-                      value: /^[0-9]+$/,
-                      message: "Only Numbers",
+                    validate: {
+                      minLength: (value) => {
+                        if (value && value.replace(/_/g, "").length < 3) {
+                          return "Fill in this field";
+                        }
+                      },
                     },
-                    minLength: 3,
-                    maxLength: 3,
                   })}
                   placeholder="e.g. 123
           "
@@ -171,12 +191,12 @@ function App() {
             </section>
             <input
               onClick={() => {
-                if (userSurname && cardNum && month && year && ccv !== "") {
-                  setForm(false);
-                  setRegistered(true);
-                } else {
-                  setError(true);
+                if(userSurname.length >= 10 && cardNum.length === 19 && month.length === 2 && year.length === 2 && ccv.length === 3){
+                   setForm(false);
+                setRegistered(true);
+
                 }
+               
               }}
               type="submit"
               className="w-[327px] h-[53px] cursor-pointer rounded-[8px] mt-[10px] bg-[#21092f] text-white xxl:w-[381px]"
@@ -184,6 +204,7 @@ function App() {
           </form>
         )}
       </div>
+      {console.log(cardNum.length)}
       {registered && (
         <div className="flex flex-col items-center gap-[16px] mt-[80px] xxl:mt-[-100px] xxl:ml-[30px]">
           <img
